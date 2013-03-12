@@ -1,9 +1,17 @@
 author: vemacs
 database: false
 description: Simple chat manager for Bukkit
-generator: http://dinnerbone.com/minecraft/tools/pluginator/
 main: com.nullblock.vemacs.plugins.simplecm.SimpleCM
 name: SimpleCM
-startup: postworld
 url: http://github.com/vemacs/SimpleCM
 version: '1.0'
+
+commands:
+    scm:
+        description: Multiple commands, use '/scm help' to see all.
+        usage: "/scm help"
+        
+permissions:
+    simplecm.colors:
+        description: Allows you to use colors in chat.
+        default: true

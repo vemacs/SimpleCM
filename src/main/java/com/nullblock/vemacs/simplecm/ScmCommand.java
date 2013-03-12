@@ -261,7 +261,7 @@ public class ScmCommand
   }
 
   private String commandHelp(String command, String function) {
-    String message = ChatColor.AQUA + "" + ChatColor.BOLD + ">" + ChatColor.WHITE + "/spr " + command;
+    String message = ChatColor.AQUA + "" + ChatColor.BOLD + ">" + ChatColor.WHITE + "/scm " + command;
     return message;
   }
 

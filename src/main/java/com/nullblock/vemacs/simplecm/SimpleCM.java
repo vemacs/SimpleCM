@@ -40,7 +40,7 @@ public class SimpleCM extends JavaPlugin
     Config.firstRun(this);
     ScmCommand.initialise();
     getServer().getPluginManager().registerEvents(this, this);
-    getCommand("spr").setExecutor(new ScmCommand(this));
+    getCommand("scm").setExecutor(new ScmCommand(this));
   }
 
   @EventHandler(priority=EventPriority.NORMAL)
@@ -51,6 +51,10 @@ public class SimpleCM extends JavaPlugin
     String suffix = Config.getSuffix(player);
     String world = Config.getWorld(player);
     String message = event.getMessage().replaceAll("%", "%%");
+    if(player.hasPermission("simplecm.colors"))
+    {
+    	message = replaceColors(message);
+    }
     if (template == null) template = "<[time] [world] [prefix][name][suffix]> ";
     if (timeFormat == null) timeFormat = "[h:mm aa]";
     String formattedName = template.replaceAll("\\[world\\]", world).replaceAll("\\[prefix\\]", prefix).replaceAll("\\[name\\]", player.getDisplayName()).replaceAll("\\[suffix\\]", suffix).replaceAll("(&([A-Fa-f0-9L-Ol-okKrR]))", "§$2");
@@ -74,4 +78,25 @@ public class SimpleCM extends JavaPlugin
 
     return false;
   }
+  
+  public static String replaceColors(String text) {
+	        char[] chrarray = text.toCharArray();
+	 
+	        for (int index = 0; index < chrarray.length; index ++) {
+	            char chr = chrarray[index];
+	            if (chr != '&') {
+	                continue;
+	            }
+	 
+	            if ((index + 1) == chrarray.length) {
+	                break;
+	            }
+	             char forward = chrarray[index + 1];
+	            if ((forward >= '0' && forward <= '9') || (forward >= 'a' && forward <= 'f') || (forward >= 'k' && forward <= 'r')) {
+	                chrarray[index] = '\u00A7';
+	            }
+	        }
+	         return new String(chrarray);
+  }
+  
 }
